@@ -11,6 +11,6 @@ export const searchRobots = (state = initialState, action = {}) => {
             return Object.assign({}, state, { searchField: action.payload });
 
         default:
-            state;
+            return state;
     }
 }   
