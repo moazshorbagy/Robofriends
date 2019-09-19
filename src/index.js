@@ -2,15 +2,19 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 // Provider: passes down the store to components as a prop
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
+import { createLogger } from 'redux-logger';
+import thunkMiddleware from 'redux-thunk';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
 import 'tachyons'
-import { searchRobots } from './reducers.js';
+import { rootReducer } from './reducers.js';
 import App from './containers/app/app.js';
 
+const logger = createLogger();
+
 // Keeps all the state of our app
-const store = createStore(searchRobots);
+const store = createStore(rootReducer, applyMiddleware(thunkMiddleware, logger));
 
 ReactDOM.render(
     <Provider store={store}>
