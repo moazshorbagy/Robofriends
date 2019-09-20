@@ -10,6 +10,7 @@ import './app.css';
 
 import { setSearchField, requestRobots } from '../../actions.js';
 
+// parameter state comes from index.js provider store state (rootReducers)
 const mapStateToProps = state => ({
     searchField: state.searchRobots.searchField,
     robots: state.requestRobots.robots,
@@ -17,6 +18,8 @@ const mapStateToProps = state => ({
     error: state.requestRobots.error
 });
 
+// dispatch the DOM changes to call an action. note mapStateToProps returns object, mapDispatchToProps returns function
+// the function returns an object then uses connect to change the data from reducers.
 const mapDispatchToProps = dispatch => ({
     onSearchChange: (event) => dispatch(setSearchField(event.target.value)),
     onRequestRobots: () => dispatch(requestRobots())
@@ -52,4 +55,5 @@ class App extends Component {
     }
 }
 
+// action done from mapDispatchToProps will channge state from mapStateToProps
 export default connect(mapStateToProps, mapDispatchToProps)(App);
